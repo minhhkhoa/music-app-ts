@@ -1,8 +1,7 @@
-import express, { Express, Request, Response} from "express"
+import express, { Express } from "express"
 import dotenv from "dotenv"
 import * as database from "./config/database"
-
-import Topic from "./models/topic.model"
+import clientRoutes from "./routes/client/index.route"
 
 dotenv.config()
 database.connect() //-goi ham connect
@@ -15,15 +14,9 @@ app.set("views", "./views") //-xet thu muc views
 app.set("view engine", "pug") //- V s/d: pug
 //-end pug view
 
-app.get("/topics", async (req: Request, res: Response) => {
-  const topics = await Topic.find({
-    deleted: false
-  })
-  console.log(topics)
-  res.render("client/pages/topics/index",{
-
-  })
-})
+//-client route
+clientRoutes(app)
+//-end client route
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
