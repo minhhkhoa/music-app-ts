@@ -148,13 +148,36 @@
 
 .singer-detail .inner-actions .inner-like.active {
   color: #0059ff;
+  font-weight: 500;
 }
 
 .singer-detail .inner-actions .inner-like.active i {
   font-weight: 900;
+  /* to mau like*/
 }
 
 /* end nut like */
+
+/* nut yeu thich */
+.singer-detail .inner-actions .inner-heart {
+  cursor: pointer;
+}
+
+.singer-detail .inner-actions .inner-heart i {
+  color: #e11354;
+}
+
+.singer-detail .inner-actions .inner-heart.active {
+  color: #e11354;
+  font-weight: 500;
+}
+
+.singer-detail .inner-actions .inner-heart.active i {
+  font-weight: 900;
+  /* to mau trai tim */
+}
+
+/* end nut yeu thich */
 
 
 .inner-actions .inner-action i {

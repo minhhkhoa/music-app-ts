@@ -52,11 +52,40 @@ if (buttonLike) {
     fetch(link, option)//-fetch goi toi dg link do
       .then(res => res.json()) //- cho phan hoi ve
       .then(data => {
-        const span = buttonLike.querySelector("span")
-        span.innerHTML = `${data.like} Thích` //- viet lai giao dien
+        if (data.code == 200) {
+          const span = buttonLike.querySelector("span")
+          span.innerHTML = `${data.like} Thích` //- viet lai giao dien
 
-        buttonLike.classList.toggle("active") //-muc dich de css khi an vao thi to xanh
+          buttonLike.classList.toggle("active") //-muc dich de css khi an vao thi to xanh
+        }
       })
   })
 }
 //-end button like
+
+//-button favorite
+const buttonFavorite = document.querySelector("[button-favorite]")
+if (buttonFavorite) {
+  buttonFavorite.addEventListener("click", () => { //- gawn sk cho nut do
+    //-lay ra id
+    const idSong = buttonFavorite.getAttribute("button-favorite")
+
+    //-tao API
+    const isActive = buttonFavorite.classList.contains("active") //-ktra xem chua class la "active ko" - co active tuc la da like
+    const typeFavorite = isActive ? "unfavorite" : "favorite"
+
+    const option = {
+      method: "PATCH"
+    }
+
+    const link = `/songs/favorite/${typeFavorite}/${idSong}`
+    fetch(link, option)//-fetch goi toi dg link do
+      .then(res => res.json()) //- cho phan hoi ve
+      .then(data => {
+        if (data.code == 200) {
+          buttonFavorite.classList.toggle("active") //-muc dich de css khi an vao thi to xanh
+        }
+      })
+  })
+}
+//-end button favorite

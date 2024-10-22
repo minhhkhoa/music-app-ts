@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Topic from "../../models/topic.model";
 import Song from "../../models/song.model";
 import Singer from "../../models/singer.model";
+import FavoriteSong from "../../models/favorite-song.model";
 
 // [get] /songs/:slugTopic
 export const list = async (req: Request, res: Response) => {
@@ -60,6 +61,16 @@ export const detail = async (req: Request, res: Response) => {
     deleted: false
   }).select("title")
 
+  //-render tim khi da yeu thich
+  const favoriteSong = await FavoriteSong.findOne({
+    songId: song.id
+  })
+
+  // -addkey
+  song["isFavoriteSong"] = favoriteSong ? true : false
+  //-end render tim khi da yeu thich
+
+
   res.render("client/pages/songs/detail", {
     pageTitle: "Chi tiết bài hát",
     song: song,
@@ -96,5 +107,44 @@ export const like = async (req: Request, res: Response) => {
     code: 200,
     message: "Thành công",
     like: newLike
+  })
+}
+
+// [patch] /songs/favorite/:typeFavorite/:idSong
+export const favorite = async (req: Request, res: Response) => {
+  //-lay ra idSong
+  const idSong: string = req.params.idSong
+  const typeFavorite: string = req.params.typeFavorite
+
+  switch (typeFavorite) {
+    case "favorite":
+      //-check xem da yeu thich chua
+      const existFavoriteSong = await FavoriteSong.findOne({
+        songId: idSong
+      })
+      if(!existFavoriteSong){ //-neu ch yeu thich thi cho no yeu thich
+        const record = new FavoriteSong({
+          // userId: "",
+          songId: idSong
+        })
+
+        await record.save()
+      }
+      break
+
+    case "unfavorite":
+      //-huy yeu thich: deleted: false or xoa luon
+      await FavoriteSong.deleteOne({
+        songId: idSong
+      })
+      break
+      
+    default:
+      break;
+  }
+
+  res.json({
+    code: 200,
+    message: "Thành công",
   })
 }
