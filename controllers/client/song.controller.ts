@@ -80,7 +80,7 @@ export const detail = async (req: Request, res: Response) => {
 }
 
 // [patch] /songs/like/:typeLike/:idSong
-//-y/c la like nhung ko bi load lai trang
+//-y/c la like nhung ko bi load lai trang --> viet theo API
 export const like = async (req: Request, res: Response) => {
   //-lay ra idSong
   const idSong: string = req.params.idSong

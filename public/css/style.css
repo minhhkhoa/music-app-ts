@@ -100,14 +100,14 @@
   font-size: 13px;
   font-weight: 500;
   color: #282828;
-  padding-bottom: 12px;
+  padding-bottom: 2px;
 }
 
 .song-item .inner-content .inner-like {
   font-size: 13px;
   font-weight: 500;
   color: #004cd0;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .song-item .inner-content .inner-time {
@@ -116,20 +116,34 @@
   color: #585858;
 }
 
+.song-item .inner-content .inner-heart.active {
+  color: #e11354;
+  cursor: pointer;
+}
+.song-item .inner-content .inner-heart {
+  cursor: pointer;
+}
+
+.song-item .inner-content .inner-heart.active i {
+  font-weight: 900;
+  margin-bottom: 6px;
+  /* font-size: 13px; */
+  cursor: pointer;
+}
+
+/* end song item */
+
 /* detai song */
-/* Container for the entire music player section */
 .singer-detail {
   margin: 3rem 0;
 }
 
-/* Title styling */
 .inner-title {
   font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
-/* Action icons and text styles */
 .inner-actions .inner-action {
   display: inline-flex;
   align-items: center;
@@ -184,26 +198,21 @@
   margin-right: 0.5rem;
 }
 
-/* The rotating avatar image (20% smaller) */
 .inner-avatar {
   position: relative;
   display: inline-block;
   width: 120px;
-  /* Reduced size */
   height: 120px;
   margin: 0 auto;
-  /* Center avatar */
   border-radius: 50%;
   border: 5px solid orange;
   overflow: hidden;
   animation: rotateAvatar 10s linear infinite;
-  /* Slower rotation */
   margin-top: 40px;
   animation-play-state: paused;
   /* //-running la chay */
 }
 
-/* Ensure image fits inside the circle */
 .inner-avatar img {
   width: 100%;
   height: 100%;
@@ -211,7 +220,6 @@
   border-radius: 50%;
 }
 
-/* Audio player centered within avatar */
 .inner-play {
   display: flex;
   justify-content: center;
@@ -224,10 +232,8 @@
 
 .inner-audio audio {
   width: 100%;
-  /* Adjust width to match avatar size */
 }
 
-/* Text and labels for description and lyrics */
 .inner-desc {
   margin-top: 2rem;
   padding: 1rem;
@@ -237,7 +243,6 @@
   position: relative;
 }
 
-/* Title and underline (orange line for header) */
 .inner-desc .inner-label {
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -255,11 +260,9 @@
   margin-top: 0.5rem;
 }
 
-/* Text content */
 .inner-desc .inner-text {
   font-size: 1rem;
   color: #555;
-  /* Lighter text for readability */
   line-height: 1.5;
   margin-top: 0.5rem;
 }
