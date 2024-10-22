@@ -20,7 +20,7 @@ export const list = async (req: Request, res: Response) => {
   }).select("avatar title slug singerId like ")
 
   //-lap qua songs de lay ra ten ca si thong qua singerId
-  for (const song of songs){
+  for (const song of songs) {
     const infoSinger = await Singer.findOne({
       _id: song.singerId,
       status: "active",
@@ -37,7 +37,7 @@ export const list = async (req: Request, res: Response) => {
   })
 }
 
-// [get] /detail/:slugSong
+// [get] /songs/detail/:slugSong
 export const detail = async (req: Request, res: Response) => {
   //-lay ra slug
   const slugSong: string = req.params.slugSong
@@ -60,10 +60,41 @@ export const detail = async (req: Request, res: Response) => {
     deleted: false
   }).select("title")
 
-  res.render("client/pages/songs/detail",{
+  res.render("client/pages/songs/detail", {
     pageTitle: "Chi tiết bài hát",
     song: song,
     singer: singer,
     topic: topic
+  })
+}
+
+// [patch] /songs/like/:typeLike/:idSong
+//-y/c la like nhung ko bi load lai trang
+export const like = async (req: Request, res: Response) => {
+  //-lay ra idSong
+  const idSong: string = req.params.idSong
+  const typeLike: string = req.params.typeLike
+
+  //-lay ra bai hat do
+  const song = await Song.findOne({
+    _id: idSong,
+    status: "active",
+    deleted: false
+  })
+
+  //-update lai luot like'
+
+  const newLike: number = typeLike == "like" ? song.like + 1 : song.like - 1
+  await Song.updateOne({
+    _id: idSong
+  },
+  {
+    like: newLike
+  })
+
+  res.json({
+    code: 200,
+    message: "Thành công",
+    like: newLike
   })
 }

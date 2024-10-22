@@ -22,13 +22,41 @@ if (aplayer) {
   // -fix khi phat nhac dia moi quay
   const avatar = document.querySelector(".singer-detail .inner-avatar")
 
-  ap.on('play',  () => {
+  ap.on('play', () => {
     avatar.style.animationPlayState = "running"
   })
 
-  ap.on('pause',  () => {
+  ap.on('pause', () => {
     avatar.style.animationPlayState = "paused"
   })
   // -end fix khi phat nhac dia moi quay
 }
 //-end aplayer 
+
+//-button like
+const buttonLike = document.querySelector("[button-like]")
+if (buttonLike) {
+  buttonLike.addEventListener("click", () => { //- gawn sk cho nut do
+    //-lay ra id
+    const idSong = buttonLike.getAttribute("button-like")
+
+    //-tao API
+    const isActive = buttonLike.classList.contains("active") //-ktra xem chua class la "active ko" - co active tuc la da like
+    const typeLike = isActive ? "dislike" : "like"
+
+    const option = {
+      method: "PATCH"
+    }
+
+    const link = `/songs/like/${typeLike}/${idSong}`
+    fetch(link, option)//-fetch goi toi dg link do
+      .then(res => res.json()) //- cho phan hoi ve
+      .then(data => {
+        const span = buttonLike.querySelector("span")
+        span.innerHTML = `${data.like} Thích` //- viet lai giao dien
+
+        buttonLike.classList.toggle("active") //-muc dich de css khi an vao thi to xanh
+      })
+  })
+}
+//-end button like
