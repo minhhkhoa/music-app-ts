@@ -148,3 +148,34 @@ export const favorite = async (req: Request, res: Response) => {
     message: "Thành công",
   })
 }
+
+// [patch] /songs/listen:idSong
+export const listen = async (req: Request, res: Response) => {
+  //-lay ra id gui len
+  const idSong: string = req.params.idSong
+
+  //-tim bai hat theo id do (da update them key listen trong model Song)
+  const song = await Song.findOne({
+    _id: idSong
+  })
+
+  //-tinh luot nghe
+  const listen: number = song.listen + 1
+
+  await Song.updateOne({
+    _id: idSong
+  },{
+    listen: listen
+  })
+
+  //-nen lam nhu nay de cho chinh xac hon
+  const songNew = await Song.findOne({
+    _id: idSong
+  })
+
+  res.json({
+    code: 200,
+    message: "Thành công",
+    listen: songNew.listen
+  })
+}

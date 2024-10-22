@@ -29,6 +29,21 @@ if (aplayer) {
   ap.on('pause', () => {
     avatar.style.animationPlayState = "paused"
   })
+
+  ap.on('ended', () => {
+    const link = `/songs/listen/${dataSong._id}`
+
+    const option = {
+      method: "PATCH"
+    }
+
+    fetch(link, option)//-fetch goi toi dg link do
+      .then(res => res.json()) //- cho phan hoi ve
+      .then(data => {
+        const elementListenSpan = document.querySelector(".singer-detail .inner-listen span")
+        elementListenSpan.innerHTML = `${data.listen} lượt nghe`
+      })
+  })
   // -end fix khi phat nhac dia moi quay
 }
 //-end aplayer 

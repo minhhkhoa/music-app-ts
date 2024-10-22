@@ -12,4 +12,6 @@ router.patch("/like/:typeLike/:idSong", controller.like) //- vi co chinh sua db 
 
 router.patch("/favorite/:typeFavorite/:idSong", controller.favorite)
 
+router.patch("/listen/:idSong", controller.listen)
+
 export const songRoutes: Router = router
