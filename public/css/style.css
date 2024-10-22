@@ -100,7 +100,7 @@
   font-size: 13px;
   font-weight: 500;
   color: #282828;
-  margin-bottom: 2px;
+  padding-bottom: 12px;
 }
 
 .song-item .inner-content .inner-like {
@@ -115,3 +115,121 @@
   font-weight: 500;
   color: #585858;
 }
+
+/* detai song */
+/* Container for the entire music player section */
+.singer-detail {
+  margin: 3rem 0;
+}
+
+/* Title styling */
+.inner-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Action icons and text styles */
+.ineer-actions .inner-action {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1rem;
+  font-size: 1rem;
+}
+
+.ineer-actions .inner-action i {
+  margin-right: 0.5rem;
+}
+
+/* The rotating avatar image (20% smaller) */
+.inner-avatar {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  /* Reduced size */
+  height: 120px;
+  margin: 0 auto;
+  /* Center avatar */
+  border-radius: 50%;
+  border: 5px solid orange;
+  overflow: hidden;
+  animation: rotateAvatar 10s linear infinite;
+  /* Slower rotation */
+  margin-top: 40px;
+  /* animation-play-state: paused; */ 
+  /* //-running la chay */
+}
+
+/* Ensure image fits inside the circle */
+.inner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Audio player centered within avatar */
+.inner-play {
+  display: flex;
+  justify-content: center;
+}
+
+.inner-audio {
+  margin-top: 10%;
+  width: 500px;
+}
+
+.inner-audio audio {
+  width: 100%;
+  /* Adjust width to match avatar size */
+}
+
+/* Text and labels for description and lyrics */
+.inner-desc {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  /* Light background */
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Title and underline (orange line for header) */
+.inner-desc .inner-label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: orange;
+  position: relative;
+}
+
+.inner-desc .inner-label::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: orange;
+  margin-top: 0.5rem;
+}
+
+/* Text content */
+.inner-desc .inner-text {
+  font-size: 1rem;
+  color: #555;
+  /* Lighter text for readability */
+  line-height: 1.5;
+  margin-top: 0.5rem;
+}
+
+/* Keyframes for rotating the avatar image */
+@keyframes rotateAvatar {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* end detai song */

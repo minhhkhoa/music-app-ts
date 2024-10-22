@@ -28,11 +28,42 @@ export const list = async (req: Request, res: Response) => {
     })
 
     //-add key
-    song["infoSinger"] = infoSinger
+    song["infoSinger"] = infoSinger //infoSinger.fullName
   }
 
   res.render("client/pages/songs/list", {
     pageTitle: topic.title,
     songs: songs
+  })
+}
+
+// [get] /detail/:slugSong
+export const detail = async (req: Request, res: Response) => {
+  //-lay ra slug
+  const slugSong: string = req.params.slugSong
+  //-lay ra bai hát
+  const song = await Song.findOne({
+    slug: slugSong,
+    status: "active",
+    deleted: false
+  })
+
+  //-lay ra thong tin ca si
+  const singer = await Singer.findOne({
+    _id: song.singerId,
+    deleted: false
+  }).select("fullName")
+
+  //-lay ra thong tin chu de
+  const topic = await Topic.findOne({
+    _id: song.topicId,
+    deleted: false
+  }).select("title")
+
+  res.render("client/pages/songs/detail",{
+    pageTitle: "Chi tiết bài hát",
+    song: song,
+    singer: singer,
+    topic: topic
   })
 }
