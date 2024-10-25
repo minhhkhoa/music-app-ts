@@ -14,7 +14,8 @@ router.get("/", controller.index)
 
 router.get("/create", controller.create)
 
-router.post("/create", 
+router.post(
+  "/create", 
   upload.fields([
     { name: 'avatar', maxCount: 1 }, 
     { name: 'audio', maxCount: 8 }

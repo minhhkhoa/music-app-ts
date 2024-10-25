@@ -10,6 +10,7 @@ database.connect() //-goi ham connect
 
 const app: Express = express()
 const port: number | string = process.env.PORT || 3000
+const methodOverride = require('method-override');
 
 //-thay the cho body-parser
 app.use(express.json()); // Để parse JSON
@@ -25,6 +26,9 @@ app.set("view engine", "pug") //- V s/d: pug
 
 //-App lacal variables(tạo biến toàn cục để bất kể ở file bug nào cx dùng dc prefixAdmin)
 app.locals.prefixAdmin = systemConfig.prefixAdmin
+
+// Sử dụng method-override với tham số _method
+app.use(methodOverride('_method'));
 
 //-admin route
 adminRoutes(app)

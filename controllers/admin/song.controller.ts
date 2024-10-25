@@ -4,7 +4,7 @@ import Singer from "../../models/singer.model";
 import Topic from "../../models/topic.model";
 import { systemConfig } from "../../config/config";
 
-//[get] /admin/topic
+//[get] /admin/songs
 export const index = async (req: Request, res: Response) => {
   //-lay tat ca bai hat
   const songs = await Song.find({
@@ -34,7 +34,7 @@ export const index = async (req: Request, res: Response) => {
   })
 }
 
-//[get] /admin/create
+//[get] /admin/songs/create
 export const create = async (req: Request, res: Response) => {
   const topics = await Topic.find({
     deleted: false,
@@ -53,7 +53,7 @@ export const create = async (req: Request, res: Response) => {
   })
 }
 
-//[get] /admin/create
+//[post] /admin/songs/create
 export const createPost = async (req: Request, res: Response) => {
   //-client gui data thong qua form--> req.body(cai tehm thu vien body-parser)
   //-vi co enctype="multipart/form-data" --. cai them thu vien multer --> nhung vao route

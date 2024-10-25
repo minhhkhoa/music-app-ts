@@ -1,0 +1,25 @@
+extends ../../layouts/default.pug
+
+block main
+  h1(class="mb-4") !{topic.title}
+
+  div(class="mb-4")
+    img(
+      src=topic.avatar
+      style="width: 100px"
+    )
+
+  div(class="mb-4")
+    p !{topic.description}
+
+    div(class="mb-4")
+      span Trạng thái: 
+      if (topic.status === "active")
+        span(class="badge badge-success") Hoạt động
+      else 
+        span(class="badge badge-danger") Dừng hoạt động
+
+    a(
+    class ="btn btn-warning btn-sm"
+    href=`/${prefixAdmin}/topics/edit/${topic.id}`
+  ) Chỉnh sửa
