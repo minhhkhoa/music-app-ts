@@ -15,8 +15,12 @@ router.get("/", controller.index)
 router.get("/create", controller.create)
 
 router.post("/create", 
-  upload.single("avatar"),
-  uploadCloud.uploadSingle,
-  controller.createPost)
+  upload.fields([
+    { name: 'avatar', maxCount: 1 }, 
+    { name: 'audio', maxCount: 8 }
+  ]),
+  uploadCloud.uploadFields,
+  controller.createPost
+)
 
 export const songRoutes: Router = router
