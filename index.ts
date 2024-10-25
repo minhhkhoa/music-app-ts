@@ -11,6 +11,11 @@ database.connect() //-goi ham connect
 const app: Express = express()
 const port: number | string = process.env.PORT || 3000
 
+//-thay the cho body-parser
+app.use(express.json()); // Để parse JSON
+app.use(express.urlencoded({ extended: true })); // Để parse URL-encoded
+//-end thay the cho body-parser
+
 app.use(express.static("public")) //-Express sẽ tự động tìm các tệp trong thư mục public và cung cấp chúng cho người dùng khi có yêu cầu (request) tương ứng-->(ko can tao route)
 
 //-pug view
