@@ -63,7 +63,7 @@ export const createPost = async (req: Request, res: Response) => {
   if (req.body.avatar) {
     avatar = req.body.avatar[0]
   }
-  if (req.body.avatar) {
+  if (req.body.audio) {
     audio = req.body.audio[0]
   }
 
