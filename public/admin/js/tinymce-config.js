@@ -7,6 +7,7 @@ if(listTextareaMCE.length > 0){
       //-tất cả cac thẻ textarea thành dạng nhập liệu đó
       selector: `#${id}`,
       plugins: 'image code',
+      readonly: false,
       image_title: true,
       aotomatic_uploads: true,
       file_picker_types: "image",

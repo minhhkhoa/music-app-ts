@@ -1,1 +1,15 @@
-console.log("OK")
+//-Start Upload preview image
+const uploadImage = document.querySelector("[upload-image]")
+if (uploadImage) {
+  const uploadImageInput = document.querySelector("[upload-image-input]")
+  const uploadImagePreview = document.querySelector("[upload-image-preview]")
+  uploadImageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0]
+    console.log(file)
+    if (file) {
+      //-gan scr bang dg dan toi file anh
+      uploadImagePreview.src = URL.createObjectURL(file)
+    }
+  })
+}
+//-End Upload preview image
