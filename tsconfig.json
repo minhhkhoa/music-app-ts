@@ -6,9 +6,5 @@
     // "strict": true, //-check lỗi viết mã ts
     "esModuleInterop": true, //- dùng được từ khóa import thay cho require
     "removeComments": true //- xóa cmt khi biên dịch sang js
-  },
-  "include": [
-    "src/**/*.ts",
-    "express.d.ts"
-  ]
+  }
 }

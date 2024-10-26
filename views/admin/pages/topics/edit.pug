@@ -4,8 +4,10 @@ extends ../../layouts/default.pug
 block main 
   h1(class="mb-4") #{pageTitle}
 
+  p #{topic._id}
+
   form(
-    action=`/${prefixAdmin}/topics/edit/${topic.id}?_method=PATCH`
+    action=`/${prefixAdmin}/topics/edit/${topic._id}?_method=PATCH`
     method="POST"
     enctype="multipart/form-data"
   )

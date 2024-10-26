@@ -24,6 +24,7 @@ export const create = async (req: Request, res: Response) => {
 }
 //[post] /admin/topics/create
 export const createPost = async (req: Request, res: Response) => {
+
   let avatar = ""
   if(req.body.avatar){
     avatar = req.body.avatar[0]
@@ -36,6 +37,7 @@ export const createPost = async (req: Request, res: Response) => {
     avatar: avatar
   }
 
+console.log(dataTopic)
   const topic = new Topic(dataTopic)
   await topic.save()
   res.redirect(`/${systemConfig.prefixAdmin}/topics`)
@@ -49,8 +51,7 @@ export const detail = async (req: Request, res: Response) => {
   const topic = await Topic.findOne({
     _id: topicId,
     deleted: false,
-    status: "active"
-  }).select("title avatar description status")
+  })
 
   console.log(topic)
 
@@ -69,8 +70,7 @@ export const edit = async (req: Request, res: Response) => {
   const topic = await Topic.findOne({
     _id: topicId,
     deleted: false,
-    status: "active"
-  }).select("title avatar description status")
+  })
 
   res.render("admin/pages/topics/edit", {
     pageTitle: "Chỉnh sửa chủ đề",
@@ -82,21 +82,14 @@ export const edit = async (req: Request, res: Response) => {
 export const editPatch = async (req: Request, res: Response) => {
   const topicId = req.params.topicId;
 
-  let avatar = "";
-  if (req.file) {
-    avatar = `/uploads/${req.file.filename}`; // Lưu đường dẫn ảnh
-  } else if (req.body.avatar) {
-    avatar = req.body.avatar; // Giữ nguyên nếu không tải file mới
-  }
 
   const dataTopic = {
     title: req.body.title,
     description: req.body.description,
     status: req.body.status,
-    avatar: avatar
+    avatar: req.body.avatar
   };
 
-  console.log(dataTopic);
 
   // Cập nhật thông tin
   await Topic.updateOne({ _id: topicId }, dataTopic);

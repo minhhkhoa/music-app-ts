@@ -30,7 +30,9 @@ router.get("/edit/:topicId", controller.edit)
 
 router.patch(
   "/edit/:topicId", 
-  upload.single('avatar'),
-  controller.editPatch)
+  upload.single("avatar"),
+  uploadCloud.uploadSingle,
+  controller.editPatch
+)
 
-export const topicRoutes: Router = router
+export const topicRoutes: Router = router 
