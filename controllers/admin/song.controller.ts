@@ -12,15 +12,19 @@ export const index = async (req: Request, res: Response) => {
   })
 
   for (const song of songs) {
+
+    //- ko ne de deleted:false boi vi khi xoa casi hoac topic minh se de nos bang true 
+    //- nen khi truy van o day se ko tim ra dau
     const infoSinger = await Singer.findOne({
       _id: song.singerId,
-      deleted: false
+      // deleted: false
     }).select("fullName")
 
     const infoTopic = await Topic.findOne({
       _id: song.topicId,
-      deleted: false
+      // deleted: false
     }).select("title")
+
 
     //-add key
     song["infoSinger"] = infoSinger
@@ -32,6 +36,7 @@ export const index = async (req: Request, res: Response) => {
     pageTitle: "Quản lý bài hát",
     songs: songs
   })
+
 }
 
 //[get] /admin/songs/create
@@ -79,6 +84,21 @@ export const createPost = async (req: Request, res: Response) => {
 
   const song = new Song(dataSong)
   await song.save()
+
+  res.redirect(`/${systemConfig.prefixAdmin}/songs`)
+}
+
+
+//[delete] /admin/songs/delete?:topicId
+export const deleteSong = async (req: Request, res: Response) => {
+
+  const topicId = req.params.topicId
+  console.log(topicId)
+  await Song.updateOne({
+    _id: topicId
+  }, {
+    deleted: true
+  })
 
   res.redirect(`/${systemConfig.prefixAdmin}/songs`)
 }

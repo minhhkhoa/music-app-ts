@@ -35,4 +35,10 @@ router.patch(
   controller.editPatch
 )
 
+router.delete(
+  "/delete/:topicId", 
+  controller.deleteTopic
+)
+
+
 export const topicRoutes: Router = router 

@@ -37,7 +37,6 @@ export const createPost = async (req: Request, res: Response) => {
     avatar: avatar
   }
 
-console.log(dataTopic)
   const topic = new Topic(dataTopic)
   await topic.save()
   res.redirect(`/${systemConfig.prefixAdmin}/topics`)
@@ -52,9 +51,6 @@ export const detail = async (req: Request, res: Response) => {
     _id: topicId,
     deleted: false,
   })
-
-  console.log(topic)
-
 
   res.render("admin/pages/topics/detail",{
     pageTitle: "Chi tiết chủ đề",
@@ -96,3 +92,22 @@ export const editPatch = async (req: Request, res: Response) => {
 
   res.redirect(`/${systemConfig.prefixAdmin}/topics`);
 };
+
+//[delete] /admin/topics/delete/:topicId
+export const deleteTopic = async (req: Request, res: Response) => {
+  //-lay ra dua can xoa
+  const topicId = req.params.topicId
+
+  try{
+    //-xoa mem
+    await Topic.updateOne({
+      _id: topicId
+    },{
+      deleted: true
+    })
+    res.redirect(`/${systemConfig.prefixAdmin}/topics`)
+  } catch(err){
+    res.redirect(`/${systemConfig.prefixAdmin}/topics`)
+  }
+  
+}

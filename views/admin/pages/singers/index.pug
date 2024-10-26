@@ -4,14 +4,14 @@ block main
   h1(class="mb-4") #{pageTitle}
 
   .card.mb-3 
-    .card-header Danh sách 
+    .card-header Danh sách ca sĩ
     .card-body 
       .row 
         .col-8 
         
         .col-4.text-right 
           a(
-            href=`/${prefixAdmin}/topics/create`
+            href=`/${prefixAdmin}/singers/create`
             class="btn btn-outline-success"
           ) +Thêm mới
 
@@ -22,12 +22,12 @@ block main
           tr 
             th STT
             th Hình ảnh
-            th Tiêu đề
+            th Tên
             th Trạng thái
             th Hành động
 
         tbody 
-          each item, index in topics 
+          each item, index in singers 
             tr 
               td #{index +1}
               td  
@@ -37,7 +37,7 @@ block main
                   width="100px"
                   height="auto"
                 )
-              td #{item.title}
+              td #{item.fullName}
               td 
                 if(item.status === "active")
                   a(
@@ -53,11 +53,11 @@ block main
               td 
                 a(
                   class="btn btn-secondary btn-sm"
-                  href=`/${prefixAdmin}/topics/detail/${item.id}`
+                  href=`/${prefixAdmin}/singers/detail/${item.id}`
                 ) Chi tiết
                 a(
                   class="btn btn-warning btn-sm ml-1"
-                  href=`/${prefixAdmin}/topics/edit/${item.id}`
+                  href=`/${prefixAdmin}/singers/edit/${item.id}`
                 ) Sửa
                 button(
                   class="btn btn-danger btn-sm ml-1"
@@ -65,10 +65,10 @@ block main
                   data-id=item.id
                 ) Xóa
 
-        //-form delete sp
+    //-form delete singer
     form(
       action=""
       method="POST"
       id="form-delete-item"
-      data-path=`/${prefixAdmin}/topics/delete`
+      data-path=`/${prefixAdmin}/singers/delete`
       ) 

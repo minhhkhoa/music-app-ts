@@ -4,7 +4,7 @@ import multer from "multer"
 
 const router: Router = Router()
 
-import * as controller from "../../controllers/admin/song.controller"
+import * as controller from "../../controllers/admin/singer.controller"
 
 import * as uploadCloud from "../../middlewares/admin/uploadCloud.middleware";
 
@@ -16,17 +16,15 @@ router.get("/create", controller.create)
 
 router.post(
   "/create", 
-  upload.fields([
-    { name: 'avatar', maxCount: 1 }, 
-    { name: 'audio', maxCount: 8 }
-  ]),
-  uploadCloud.uploadFields,
+  upload.single("avatar"),
+  uploadCloud.uploadSingle,
   controller.createPost
 )
 
 router.delete(
-  "/delete/:topicId",
-  controller.deleteSong
+  "/delete/:singerId",
+  controller.deleteSinger
 )
 
-export const songRoutes: Router = router
+
+export const singerRoutes: Router = router
