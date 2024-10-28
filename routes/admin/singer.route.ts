@@ -21,6 +21,17 @@ router.post(
   controller.createPost
 )
 
+router.get("/detail/:singerId", controller.detail)
+
+router.get("/edit/:singerId", controller.edit)
+
+router.patch(
+  "/edit/:singerId",
+  upload.single("avatar"),
+  uploadCloud.uploadSingle,
+  controller.editPatch
+)
+
 router.delete(
   "/delete/:singerId",
   controller.deleteSinger

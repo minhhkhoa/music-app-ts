@@ -110,3 +110,72 @@ có hình ảnh nào được cung cấp */
 .form-check-lable {
   margin-top: 6px;
 }
+
+
+/* list bai hat cua song */
+.list-sings {
+  display: flex;
+  flex-wrap: wrap;
+  /* Để các mục tự xuống dòng nếu không đủ không gian */
+  gap: 20px;
+  /* Khoảng cách giữa các mục */
+}
+
+.song-item {
+  display: flex;
+  flex-direction: row;
+  /* Sắp xếp nội dung theo chiều ngang */
+  align-items: center;
+  /* Canh giữa nội dung dọc */
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  /* Bạn có thể tùy chỉnh kích thước tùy theo nhu cầu */
+}
+
+.inner-image {
+  margin-right: 15px;
+  /* Khoảng cách giữa hình ảnh và nội dung */
+}
+
+.inner-image img {
+  width: 60px;
+  /* Kích thước ảnh đại diện */
+  height: 60px;
+  border-radius: 50%;
+}
+
+.inner-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.inner-title,
+.inner-singer,
+.inner-like,
+.inner-time {
+  margin-bottom: 4px;
+}
+
+.inner-title a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+
+.inner-singer,
+.inner-like,
+.inner-time {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.inner-singer i,
+.inner-like i,
+.inner-time i {
+  margin-right: 5px;
+  color: #999;
+}
+/* list bai hat cua song */

@@ -7,8 +7,8 @@ export const index = async (req: Request, res: Response) => {
   const topics = await Topic.find({
     deleted: false
   })
-  
-  
+
+
   res.render("admin/pages/topics/index", {
     pageTitle: "Quản lý chủ đề",
     topics: topics
@@ -17,8 +17,8 @@ export const index = async (req: Request, res: Response) => {
 
 //[get] /admin/topics/create
 export const create = async (req: Request, res: Response) => {
-  
-  res.render("admin/pages/topics/create",{
+
+  res.render("admin/pages/topics/create", {
     pageTitle: "Thêm mới chủ đề"
   })
 }
@@ -26,7 +26,7 @@ export const create = async (req: Request, res: Response) => {
 export const createPost = async (req: Request, res: Response) => {
 
   let avatar = ""
-  if(req.body.avatar){
+  if (req.body.avatar) {
     avatar = req.body.avatar[0]
   }
 
@@ -52,7 +52,7 @@ export const detail = async (req: Request, res: Response) => {
     deleted: false,
   })
 
-  res.render("admin/pages/topics/detail",{
+  res.render("admin/pages/topics/detail", {
     pageTitle: "Chi tiết chủ đề",
     topic: topic
   })
@@ -78,36 +78,50 @@ export const edit = async (req: Request, res: Response) => {
 export const editPatch = async (req: Request, res: Response) => {
   const topicId = req.params.topicId;
 
-
-  const dataTopic = {
-    title: req.body.title,
-    description: req.body.description,
-    status: req.body.status,
-    avatar: req.body.avatar
-  };
+  try {
+    // Tìm topic với avatar cũ
+    const topic = await Topic.findOne({ _id: topicId }).select("avatar");
 
 
-  // Cập nhật thông tin
-  await Topic.updateOne({ _id: topicId }, dataTopic);
+    // Nếu không có avatar mới, dùng avatar cũ
+    req.body.avatar = req.body.avatar || topic.avatar;
 
-  res.redirect(`/${systemConfig.prefixAdmin}/topics`);
+    // Chuẩn bị dữ liệu cập nhật
+    const dataTopic = {
+      title: req.body.title,
+      description: req.body.description,
+      status: req.body.status,
+      avatar: req.body.avatar,
+    };
+
+    console.log(dataTopic)
+
+    // Cập nhật thông tin
+    await Topic.updateOne({ _id: topicId }, dataTopic);
+
+    res.redirect(`/${systemConfig.prefixAdmin}/topics`);
+  } catch (error) {
+    console.error("Lỗi khi cập nhật topic:", error);
+    res.status(500).send("Lỗi khi cập nhật topic.");
+  }
 };
+
 
 //[delete] /admin/topics/delete/:topicId
 export const deleteTopic = async (req: Request, res: Response) => {
   //-lay ra dua can xoa
   const topicId = req.params.topicId
 
-  try{
+  try {
     //-xoa mem
     await Topic.updateOne({
       _id: topicId
-    },{
+    }, {
       deleted: true
     })
     res.redirect(`/${systemConfig.prefixAdmin}/topics`)
-  } catch(err){
+  } catch (err) {
     res.redirect(`/${systemConfig.prefixAdmin}/topics`)
   }
-  
+
 }
