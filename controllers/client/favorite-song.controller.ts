@@ -38,6 +38,13 @@ export const index = async (req: Request, res: Response) => {
     }
   }
 
+  //-se co va de la 
+  // const favoriteSongs = [
+  //   { songId: "1", infoSong: { slug: "song-1", title: "Song 1" } },
+  //   { songId: "2" }, // Không có `infoSong`
+  //   { songId: "3", infoSong: { slug: "song-3", title: "Song 3" } },
+  // ];
+
   // Lọc ra chỉ các bài hát có infoSong hợp lệ tức là nó phải có infoSong mới được
   const validFavoriteSongs = favoriteSongs.filter((item) => item["infoSong"]);
   
