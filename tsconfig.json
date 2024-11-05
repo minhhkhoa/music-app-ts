@@ -2,9 +2,9 @@
   "compilerOptions": {
     "target": "ES6", //- cho phép biên dịch code Typescrip sang ES6
     "module": "commonjs", //- common là tiêu chuẩn được sử dụng trong Node.js để làm việc với các module
-    // "outDir": "js",
     // "strict": true, //-check lỗi viết mã ts
     "esModuleInterop": true, //- dùng được từ khóa import thay cho require
-    "removeComments": true //- xóa cmt khi biên dịch sang js
+    "removeComments": true, //- xóa cmt khi biên dịch sang js
+    "outDir": "dist"
   }
 }

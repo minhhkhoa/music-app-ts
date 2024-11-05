@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+
+block main
+  div(class="mb-4")
+    p Tên ca sĩ: <b>!{singers.fullName}.</b>
+
+  div(class="mb-4")
+    img(
+      src=singers.avatar
+      style="width: 150px; padding-bottom: 20px"
+    )
+
+
+    div(class="mb-4")
+      span Trạng thái: 
+      if (singers.status === "active")
+        span(class="badge badge-success") Hoạt động
+      else 
+        span(class="badge badge-danger") Dừng hoạt động
+
+    if(songs.length > 0)
+      p Danh sách các bài hát:
+      div(class="mb-4 list-sings")
+        each song in songs 
+          .list
+            div(class="song-item")
+              div(class="inner-image")
+                a(href=`/songs/detail/${song.slug}`)
+                  img(src= song.avatar)
+              div(class="inner-content")
+                div(class="inner-title")
+                  a(href=`/songs/detail/${song.slug}`) #{song.title}
+                div(class="inner-singer") <i class="fa-solid fa-microphone-lines"></i>#{singers.fullName}
+                div(class="inner-like") <i class="fa-solid fa-thumbs-up"></i> #{song.like}
+                div(class="inner-time") <i class="fa-regular fa-clock"></i> Hôm nay
+    else 
+      p Ca sĩ chưa có bài hát nào ở đây!
+    a(
+    class ="btn btn-warning btn-sm"
+    href=`/${prefixAdmin}/singers/edit/${singers.id}`
+  ) Chỉnh sửa

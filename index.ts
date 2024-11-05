@@ -17,10 +17,10 @@ app.use(express.json()); // Để parse JSON
 app.use(express.urlencoded({ extended: true })); // Để parse URL-encoded
 //-end thay the cho body-parser
 
-app.use(express.static("public")) //-Express sẽ tự động tìm các tệp trong thư mục public và cung cấp chúng cho người dùng khi có yêu cầu (request) tương ứng-->(ko can tao route)
+app.use(express.static(`${__dirname}/public`)) //-Express sẽ tự động tìm các tệp trong thư mục public và cung cấp chúng cho người dùng khi có yêu cầu (request) tương ứng-->(ko can tao route)
 
 //-pug view
-app.set("views", "./views") //-xet thu muc views
+app.set("views", `${__dirname}/views`) //-xet thu muc views
 app.set("view engine", "pug") //- V s/d: pug
 //-end pug view
 
