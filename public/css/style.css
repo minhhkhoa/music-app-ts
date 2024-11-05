@@ -230,6 +230,7 @@
 .inner-audio {
   margin-top: 5%;
   width: 500px;
+  margin-right: auto;
 }
 
 .inner-audio audio {
