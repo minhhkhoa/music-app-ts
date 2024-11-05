@@ -1,7 +1,7 @@
 // -aplayer 
 const aplayer = document.querySelector('#aplayer')
 if (aplayer) {
-  let dataSong = aplayer.getAttribute("data-song") //-lay data
+  let dataSong = aplayer.getAttribute("data-song") //-lay data tu detail client
   dataSong = JSON.parse(dataSong) //- Vi khi gui tu html sang thi no la kieu json nen ta can chuyen lai ve js
 
   let dataSinger = aplayer.getAttribute("data-singer")
@@ -9,11 +9,13 @@ if (aplayer) {
 
   const ap = new APlayer({
     container: aplayer,
+    lrcType: 1,
     audio: [{
       name: dataSong.title,
       artist: dataSinger.fullName,
       url: dataSong.audio,
-      cover: dataSong.avatar
+      cover: dataSong.avatar,
+      lrc: dataSong.lyrics
     }],
     autoplay: true,
     //-option
