@@ -89,17 +89,72 @@ export const createPost = async (req: Request, res: Response) => {
   res.redirect(`/${systemConfig.prefixAdmin}/songs`)
 }
 
+//[get] /admin/songs/edit/id
+export const edit = async (req: Request, res: Response) => {
+  const id = req.params.id
+
+  const song = await Song.findOne({
+    _id: id,
+    deleted: false
+  })
+
+  //-lay topic de do ra view
+  const topics = await Topic.find({
+    deleted: false
+  }).select("title")
+
+  //-lay singer do ra view
+  const singers = await Singer.find({
+    deleted: false
+  }).select("fullName")
+
+  res.render("admin/pages/songs/edit",{
+    pageTitle: "Chỉnh sửa bài hát",
+    song: song,
+    topics: topics,
+    singers: singers
+  })
+
+}
+
 
 //[delete] /admin/songs/delete?:topicId
 export const deleteSong = async (req: Request, res: Response) => {
 
-  const topicId = req.params.topicId
-  console.log(topicId)
+  const songId = req.params.songId
   await Song.updateOne({
-    _id: topicId
+    _id: songId
   }, {
     deleted: true
   })
+
+  res.redirect(`/${systemConfig.prefixAdmin}/songs`)
+}
+
+//[patch] /admin/songs/edit/id
+export const editPatch = async (req: Request, res: Response) => {
+
+  const id = req.params.id
+
+  const dataSong = {
+    title: req.body.title,
+    topicId: req.body.topicId,
+    singerId: req.body.singerId,
+    description: req.body.description,
+    status: req.body.status,
+    lyrics: req.body.lyrics
+  }
+
+  if (req.body.avatar) {
+    dataSong["avatar"] = req.body.avatar[0]
+  }
+  if (req.body.audio) {
+    dataSong["audio"] = req.body.audio[0]
+  }
+
+  await Song.updateOne({
+    _id: id
+  },dataSong)
 
   res.redirect(`/${systemConfig.prefixAdmin}/songs`)
 }
