@@ -224,10 +224,11 @@
 .inner-play {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .inner-audio {
-  margin-top: 10%;
+  margin-top: 5%;
   width: 500px;
 }
 
